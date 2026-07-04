@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #27272a #0a0a0a;
+  }
+
+  body {
+    @apply bg-surface text-white font-sans;
+    min-height: 100vh;
+  }
+
+  input, textarea, select {
+    @apply outline-none;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-white text-black font-medium px-6 py-2.5 rounded-lg
+           hover:bg-zinc-200 transition-colors duration-150
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-danger {
+    @apply bg-accent-red/10 text-accent-red border border-accent-red/20
+           px-6 py-2.5 rounded-lg font-medium
+           hover:bg-accent-red/20 transition-colors duration-150;
+  }
+
+  .btn-ghost {
+    @apply text-zinc-400 px-4 py-2 rounded-lg font-medium
+           hover:text-white hover:bg-zinc-800 transition-colors duration-150;
+  }
+
+  .input-field {
+    @apply w-full bg-zinc-900 border border-zinc-800 rounded-lg px-4 py-2.5
+           text-white placeholder-zinc-600
+           focus:border-zinc-600 focus:ring-1 focus:ring-zinc-600
+           transition-colors duration-150;
+  }
+
+  .card {
+    @apply bg-card border border-zinc-800 rounded-xl p-6;
+  }
+
+  .status-dot {
+    @apply inline-block w-2 h-2 rounded-full mr-2;
+  }
+
+  .status-pending {
+    @apply bg-accent-amber;
+  }
+
+  .status-confirmed {
+    @apply bg-accent-green;
+  }
+
+  .status-failed {
+    @apply bg-accent-red;
+  }
+}
