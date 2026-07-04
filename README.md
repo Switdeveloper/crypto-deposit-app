@@ -77,19 +77,56 @@ cd ../client && npm install
 
 ### Running Locally
 
-Start the backend (port 3001):
+#### Backend setup
+
+The backend uses SQLite, so zero external database setup is needed. The `data/` directory and database file are auto-created on first run.
+
+##### Environment variables (optional)
+
+Create `server/.env` to override defaults:
+
+```env
+PORT=3001
+JWT_SECRET=your-secure-secret-here
+CORS_ORIGIN=http://localhost:4321
+NODE_ENV=development
+```
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `PORT` | `3001` | Server port |
+| `JWT_SECRET` | `gstack-dev-secret-change-in-production` | JWT signing key — **required to change in production** |
+| `CORS_ORIGIN` | `http://localhost:4321` | Allowed CORS origin (the frontend URL) |
+| `NODE_ENV` | `development` | Environment mode |
+
+##### Start the server
 
 ```bash
 cd server
 npm run dev
 ```
 
-Start the frontend (port 4321) in a separate terminal:
+The server will:
+1. Auto-create the `data/` directory and SQLite database
+2. Create all tables (users, transactions, deposit_addresses, audit_log)
+3. Seed test accounts on first run
+4. Start on http://localhost:3001
+
+Verify it's running:
+
+```bash
+curl http://localhost:3001/api/health
+# {"status":"ok","timestamp":"..."}
+```
+
+#### Frontend setup
 
 ```bash
 cd client
 npm run dev
 ```
+
+Starts on http://localhost:4321 with hot reload. The Vite dev server proxies `/api/*` requests to the backend at `http://localhost:3001`.
 
 Open http://localhost:4321 in your browser.
 
